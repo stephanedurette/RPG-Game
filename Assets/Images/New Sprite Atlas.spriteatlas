@@ -132,6 +132,7 @@ SpriteAtlas:
   - {fileID: -1674582212, guid: f98cc9cc490984249a962ddfdb31e046, type: 3}
   - {fileID: 1525271982, guid: f98cc9cc490984249a962ddfdb31e046, type: 3}
   - {fileID: -2056434094, guid: f98cc9cc490984249a962ddfdb31e046, type: 3}
+  - {fileID: -1528138557, guid: f98cc9cc490984249a962ddfdb31e046, type: 3}
   - {fileID: 980569438, guid: f98cc9cc490984249a962ddfdb31e046, type: 3}
   - {fileID: 521229454, guid: f98cc9cc490984249a962ddfdb31e046, type: 3}
   - {fileID: 1187174454, guid: f98cc9cc490984249a962ddfdb31e046, type: 3}
@@ -216,6 +217,7 @@ SpriteAtlas:
   - Player_3
   - Player_2
   - Player_14
+  - Player_15
   - Player_10
   - Player_11
   - Player_12
