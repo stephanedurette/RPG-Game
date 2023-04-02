@@ -8324,6 +8324,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1368909667}
   - component: {fileID: 1368909666}
+  - component: {fileID: 1368909669}
   - component: {fileID: 1368909665}
   - component: {fileID: 1368909664}
   - component: {fileID: 1368909663}
@@ -8457,6 +8458,23 @@ MonoBehaviour:
   patrolState: {fileID: 550292560}
   chaseState: {fileID: 1013008475}
   attackState: {fileID: 622396352}
+--- !u!114 &1368909669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1368909662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85c620aeeca72dd4db0ed5dc2062304d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingStateIndex: 0
+  states:
+  - {fileID: 550292560}
+  - {fileID: 1013008475}
+  - {fileID: 622396352}
 --- !u!1 &1415939858
 GameObject:
   m_ObjectHideFlags: 0

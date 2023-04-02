@@ -3,15 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(StateMachine))]
 public class EnemySlime : Entity, IDamageTaker
 {
     [SerializeField] private float runSpeed = 10f;
     [SerializeField] private float playerAggroDistance, playerAttackDistance;
 
-    [SerializeField] private State patrolState;
-    [SerializeField] private State chaseState;
-    [SerializeField] private State attackState;
     private float currentSpeed;
+    private StateMachine stateMachine;
+
+    private bool hasAggro = false;
 
     public enum Speed
     {
@@ -28,14 +29,10 @@ public class EnemySlime : Entity, IDamageTaker
 
     public LayerMask AttackTargets => attackTargets;
 
-    State currentState;
-
-    // Start is called before the first frame update
     private new void Start()
     {
         base.Start();
-
-        SetState(patrolState);
+        stateMachine = GetComponent<StateMachine>();
     }
 
     // Update is called once per frame
@@ -43,28 +40,18 @@ public class EnemySlime : Entity, IDamageTaker
     {
         if (FindObjectOfType<Player>() == null)
         {
-            SetState(patrolState);
+            stateMachine.SetState(0);
         } else if (IsPlayerInRange(playerAttackDistance))
         {
-            SetState(attackState);
+            stateMachine.SetState(2);
         } else if (IsPlayerInRange(playerAggroDistance))
         {
-            SetState(chaseState);
-        } else if (currentState != patrolState)
+            stateMachine.SetState(1);
+            hasAggro = true;
+        } else if (hasAggro)
         {
-            SetState(chaseState);
+            stateMachine.SetState(1);
         }
-
-        currentState.OnUpdate();
-    }
-
-    private void SetState(State newState)
-    {
-        if (currentState != null && currentState == newState) return;
-
-        currentState?.OnExit();
-        currentState = newState;
-        currentState.OnEnter();
     }
 
     private bool IsPlayerInRange(float range)
