@@ -64,7 +64,10 @@ public class EnemySlime : MonoBehaviour, IDamageTaker
     // Update is called once per frame
     private void Update()
     {
-        if (IsPlayerInRange(playerAttackDistance))
+        if (FindObjectOfType<Player>() == null)
+        {
+            SetState(patrolState);
+        }else if (IsPlayerInRange(playerAttackDistance))
         {
             SetState(attackState);
         } else if (IsPlayerInRange(playerAggroDistance))

@@ -8,6 +8,8 @@ public class Player : MonoBehaviour, IDamageTaker
     [SerializeField] private LayerMask attackTargets;
     [SerializeField] private AudioClip attackSound;
     [SerializeField] private Health health;
+    [SerializeField] private int attackDamage = 1;
+    [SerializeField] private float knockBackDistance = .5f;
 
     private Rigidbody2D rigidBody;
     private Animator animator;
@@ -41,9 +43,11 @@ public class Player : MonoBehaviour, IDamageTaker
         float attackRadius = 1f;
         float attackDistance = 2.5f;
 
-        if (Physics2D.CircleCast(transform.position, attackRadius, lastMoveDirection, attackDistance, attackTargets))
+        var rayCastHit = Physics2D.CircleCast(transform.position, attackRadius, lastMoveDirection, attackDistance, attackTargets);
+
+        if (rayCastHit && rayCastHit.collider.gameObject.TryGetComponent(out IDamageTaker damageTaker))
         {
-            Debug.Log("hit");
+            damageTaker.TakeDamage(attackDamage, transform.position, knockBackDistance);
         }
     }
 

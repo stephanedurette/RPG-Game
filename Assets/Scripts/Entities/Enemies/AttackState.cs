@@ -10,6 +10,8 @@ public class AttackState : State
     [SerializeField] private AudioClip attackSound;
 
     [SerializeField] private float secondsBetweenAttacks = 1f;
+    [SerializeField] private int attackDamage = 1;
+    [SerializeField] private float knockBackDistance = 2f;
 
     private float currentAttackTimer;
 
@@ -35,8 +37,6 @@ public class AttackState : State
             currentAttackTimer = 0f;
             Attack();
         }
-
-
     }
 
     private void Attack()
@@ -46,9 +46,11 @@ public class AttackState : State
 
         float attackRadius = 1f;
 
-        if (Physics2D.CircleCast(transform.position, attackRadius, enemySlime.LastMoveDirection, enemySlime.PlayerAttackDistance, enemySlime.AttackTargets))
+        var rayCastHit = Physics2D.CircleCast(transform.position, attackRadius, enemySlime.LastMoveDirection, enemySlime.PlayerAttackDistance, enemySlime.AttackTargets);
+
+        if (rayCastHit && rayCastHit.collider.gameObject.TryGetComponent(out IDamageTaker damageTaker))
         {
-            Debug.Log("hit");
+            damageTaker.TakeDamage(attackDamage, transform.position, knockBackDistance);
         }
     }
 }

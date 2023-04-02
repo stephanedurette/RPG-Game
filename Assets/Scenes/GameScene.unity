@@ -1957,6 +1957,8 @@ MonoBehaviour:
   enemySlime: {fileID: 1368909668}
   attackSound: {fileID: 8300000, guid: 480a496b4e830a8448f2db3a10bed439, type: 3}
   secondsBetweenAttacks: 0.5
+  attackDamage: 1
+  knockBackDistance: 2
 --- !u!1 &624667337
 GameObject:
   m_ObjectHideFlags: 0
@@ -8508,8 +8510,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc6b85393bd4d5145b469cea56610f8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 1
-  currentHealth: 1
+  maxHealth: 5
+  currentHealth: 5
 --- !u!95 &1368909664
 Animator:
   serializedVersion: 4
@@ -24442,6 +24444,8 @@ MonoBehaviour:
     m_Bits: 128
   attackSound: {fileID: 8300000, guid: 480a496b4e830a8448f2db3a10bed439, type: 3}
   health: {fileID: 1986421868}
+  attackDamage: 1
+  knockBackDistance: 2
 --- !u!61 &1986421866
 BoxCollider2D:
   m_ObjectHideFlags: 0
