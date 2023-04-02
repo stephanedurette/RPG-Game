@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface IDamageTaker
 {
-    public void TakeDamage(int damage, Vector3 sourcePosition, float knockBackDistance);
+    public void TakeDamage(Vector3 sourcePosition, AttackAttributesSO attackAttributes);
 
 }

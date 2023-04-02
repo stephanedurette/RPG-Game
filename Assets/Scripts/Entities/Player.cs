@@ -1,60 +1,28 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour, IDamageTaker
+public class Player : Entity, IDamageTaker
 {
-    [SerializeField] private float walkSpeed = 10f;
-    [SerializeField] private LayerMask attackTargets;
-    [SerializeField] private AudioClip attackSound;
-    [SerializeField] private Health health;
-    [SerializeField] private int attackDamage = 1;
-    [SerializeField] private float knockBackDistance = .5f;
 
-    private Rigidbody2D rigidBody;
-    private Animator animator;
-
-    private Vector2 lastMoveDirection = Vector2.zero;
-
-    // Start is called before the first frame update
-    private void Start()
+    private new void OnEnable()
     {
-        rigidBody = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
-    }
-
-    private void OnEnable()
-    {
+        base.OnEnable();
         InputManager.OnAttackPressed += OnAttackPressed;
-        health.OnHealthEmpty += Health_OnHealthEmpty;
-    }
-
-    private void Health_OnHealthEmpty(object sender, System.EventArgs e)
-    {
-        FindObjectOfType<GameOverPanel>().TogglePanel(true);
-        gameObject.SetActive(false);
     }
 
     private void OnAttackPressed(object sender, System.EventArgs e)
     {
-        animator.SetTrigger("Attack");
-        Singleton.Instance.SoundManager.Play(attackSound);
-
         float attackRadius = 1f;
         float attackDistance = 2.5f;
-
-        var rayCastHit = Physics2D.CircleCast(transform.position, attackRadius, lastMoveDirection, attackDistance, attackTargets);
-
-        if (rayCastHit && rayCastHit.collider.gameObject.TryGetComponent(out IDamageTaker damageTaker))
-        {
-            damageTaker.TakeDamage(attackDamage, transform.position, knockBackDistance);
-        }
+        Attack(attackRadius, attackDistance);
     }
 
-    private void OnDisable()
+    private new void OnDisable()
     {
+        base.OnDisable();
         InputManager.OnAttackPressed -= OnAttackPressed;
-        health.OnHealthEmpty -= Health_OnHealthEmpty;
 
     }
 
@@ -72,9 +40,15 @@ public class Player : MonoBehaviour, IDamageTaker
         rigidBody.velocity = normalizedInputVector * walkSpeed;
     }
 
-    public void TakeDamage(int damage, Vector3 sourcePosition, float knockBackDistance)
+    public override void TakeDamage(Vector3 sourcePosition, AttackAttributesSO attackAttributes)
     {
-        health.ChangeHealth(-damage);
-        transform.position += (transform.position - sourcePosition).normalized * knockBackDistance;
+        health.ChangeHealth(-attackAttributes.damage);
+        transform.position += (transform.position - sourcePosition).normalized * attackAttributes.knockBackVelocity;
+    }
+
+    internal override void OnHealthEmpty(object sender, EventArgs e)
+    {
+        FindObjectOfType<GameOverPanel>().TogglePanel(true);
+        gameObject.SetActive(false);
     }
 }

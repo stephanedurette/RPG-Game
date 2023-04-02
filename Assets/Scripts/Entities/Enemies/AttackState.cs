@@ -41,16 +41,7 @@ public class AttackState : State
 
     private void Attack()
     {
-        animator.SetTrigger("Attack");
-        Singleton.Instance.SoundManager.Play(attackSound);
-
         float attackRadius = 1f;
-
-        var rayCastHit = Physics2D.CircleCast(transform.position, attackRadius, enemySlime.LastMoveDirection, enemySlime.PlayerAttackDistance, enemySlime.AttackTargets);
-
-        if (rayCastHit && rayCastHit.collider.gameObject.TryGetComponent(out IDamageTaker damageTaker))
-        {
-            damageTaker.TakeDamage(attackDamage, transform.position, knockBackDistance);
-        }
+        enemySlime.Attack(attackRadius, enemySlime.PlayerAttackDistance);
     }
 }

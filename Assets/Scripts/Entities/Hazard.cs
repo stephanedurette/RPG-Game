@@ -5,8 +5,7 @@ using UnityEngine;
 public class Hazard : MonoBehaviour
 {
     [SerializeField] LayerMask targetLayer;
-    [SerializeField] float knockBackDistance;
-    [SerializeField] int damage;
+    [SerializeField] AttackAttributesSO attackAttributes;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -14,7 +13,7 @@ public class Hazard : MonoBehaviour
 
         if (collision.gameObject.TryGetComponent(out IDamageTaker damageTaker))
         {
-            damageTaker.TakeDamage(damage, transform.position, knockBackDistance);
+            damageTaker.TakeDamage(transform.position, attackAttributes);
         }
     }
 }

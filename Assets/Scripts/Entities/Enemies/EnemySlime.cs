@@ -1,22 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySlime : MonoBehaviour, IDamageTaker
+public class EnemySlime : Entity, IDamageTaker
 {
-    [SerializeField] private float walkSpeed = 10f;
     [SerializeField] private float runSpeed = 10f;
-    [SerializeField] private LayerMask attackTargets;
-    [SerializeField] private Health health;
     [SerializeField] private float playerAggroDistance, playerAttackDistance;
 
     [SerializeField] private State patrolState;
     [SerializeField] private State chaseState;
     [SerializeField] private State attackState;
-
-    private Rigidbody2D rigidBody;
-    private Animator animator;
-
     private float currentSpeed;
 
     public enum Speed
@@ -26,9 +20,9 @@ public class EnemySlime : MonoBehaviour, IDamageTaker
         Stop
     }
 
-    public float PlayerAttackDistance => playerAttackDistance;
+    public AttackAttributesSO AttackAttributes => attackAttributes;
 
-    private Vector2 lastMoveDirection = Vector2.zero;
+    public float PlayerAttackDistance => playerAttackDistance;
 
     public Vector2 LastMoveDirection => lastMoveDirection;
 
@@ -37,28 +31,11 @@ public class EnemySlime : MonoBehaviour, IDamageTaker
     State currentState;
 
     // Start is called before the first frame update
-    private void Start()
+    private new void Start()
     {
-        rigidBody = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
+        base.Start();
 
         SetState(patrolState);
-    }
-
-    private void OnEnable()
-    {
-        health.OnHealthEmpty += Health_OnHealthEmpty;
-    }
-
-    private void Health_OnHealthEmpty(object sender, System.EventArgs e)
-    {
-        gameObject.SetActive(false);
-    }
-    
-
-    private void OnDisable()
-    {
-        health.OnHealthEmpty -= Health_OnHealthEmpty;
     }
 
     // Update is called once per frame
@@ -67,13 +44,16 @@ public class EnemySlime : MonoBehaviour, IDamageTaker
         if (FindObjectOfType<Player>() == null)
         {
             SetState(patrolState);
-        }else if (IsPlayerInRange(playerAttackDistance))
+        } else if (IsPlayerInRange(playerAttackDistance))
         {
             SetState(attackState);
         } else if (IsPlayerInRange(playerAggroDistance))
         {
             SetState(chaseState);
-        } 
+        } else if (currentState != patrolState)
+        {
+            SetState(chaseState);
+        }
 
         currentState.OnUpdate();
     }
@@ -129,10 +109,14 @@ public class EnemySlime : MonoBehaviour, IDamageTaker
         }
     }
 
-    public void TakeDamage(int damage, Vector3 sourcePosition, float knockBackDistance)
+    public override void TakeDamage(Vector3 sourcePosition, AttackAttributesSO attackAttributes)
     {
-        health.ChangeHealth(-damage);
+        health.ChangeHealth(-attackAttributes.damage);
+        transform.position += (transform.position - sourcePosition).normalized * attackAttributes.knockBackVelocity;
+    }
 
-        transform.position += (transform.position - sourcePosition).normalized * knockBackDistance;
+    internal override void OnHealthEmpty(object sender, EventArgs e)
+    {
+        Destroy(this.gameObject);
     }
 }
