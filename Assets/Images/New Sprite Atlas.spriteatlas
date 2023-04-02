@@ -48,6 +48,7 @@ SpriteAtlas:
     - {fileID: 2800000, guid: f98cc9cc490984249a962ddfdb31e046, type: 3}
     - {fileID: 2800000, guid: dffc6b274a697cc4e8e29c42acff5087, type: 3}
     - {fileID: 2800000, guid: 90e6ba014f4686443b359779d6453697, type: 3}
+    - {fileID: 2800000, guid: 58f7bbad35330da4db3c6ab3161f04a8, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
@@ -137,6 +138,22 @@ SpriteAtlas:
   - {fileID: 521229454, guid: f98cc9cc490984249a962ddfdb31e046, type: 3}
   - {fileID: 1187174454, guid: f98cc9cc490984249a962ddfdb31e046, type: 3}
   - {fileID: -1237740368, guid: f98cc9cc490984249a962ddfdb31e046, type: 3}
+  - {fileID: 356163629, guid: 58f7bbad35330da4db3c6ab3161f04a8, type: 3}
+  - {fileID: -1960067134, guid: 58f7bbad35330da4db3c6ab3161f04a8, type: 3}
+  - {fileID: 1548158949, guid: 58f7bbad35330da4db3c6ab3161f04a8, type: 3}
+  - {fileID: -214797913, guid: 58f7bbad35330da4db3c6ab3161f04a8, type: 3}
+  - {fileID: -1546549531, guid: 58f7bbad35330da4db3c6ab3161f04a8, type: 3}
+  - {fileID: -613912714, guid: 58f7bbad35330da4db3c6ab3161f04a8, type: 3}
+  - {fileID: 1366498857, guid: 58f7bbad35330da4db3c6ab3161f04a8, type: 3}
+  - {fileID: -1730575668, guid: 58f7bbad35330da4db3c6ab3161f04a8, type: 3}
+  - {fileID: -334720974, guid: 58f7bbad35330da4db3c6ab3161f04a8, type: 3}
+  - {fileID: -1892932385, guid: 58f7bbad35330da4db3c6ab3161f04a8, type: 3}
+  - {fileID: 241123395, guid: 58f7bbad35330da4db3c6ab3161f04a8, type: 3}
+  - {fileID: -489524703, guid: 58f7bbad35330da4db3c6ab3161f04a8, type: 3}
+  - {fileID: 329163898, guid: 58f7bbad35330da4db3c6ab3161f04a8, type: 3}
+  - {fileID: -936586744, guid: 58f7bbad35330da4db3c6ab3161f04a8, type: 3}
+  - {fileID: 257496301, guid: 58f7bbad35330da4db3c6ab3161f04a8, type: 3}
+  - {fileID: 294670150, guid: 58f7bbad35330da4db3c6ab3161f04a8, type: 3}
   m_PackedSpriteNamesToIndex:
   - Tileset_13
   - Tileset_12
@@ -222,6 +239,22 @@ SpriteAtlas:
   - Player_11
   - Player_12
   - Player_13
+  - move up 2
+  - move up 1
+  - idle up 1
+  - idle up 2
+  - attack up
+  - idle down 2
+  - idle down 1
+  - Enemy Slime_15
+  - move left 2
+  - move left 1
+  - attack down
+  - move down 1
+  - move down 2
+  - idle right 2
+  - idle right 1
+  - attack right
   m_RenderDataMap: {}
   m_Tag: New Sprite Atlas
   m_IsVariant: 0

@@ -12,9 +12,9 @@ public class Hazard : MonoBehaviour
     {
         if (!HelperFunctions.IsInLayerMask(collision.gameObject.layer, targetLayer)) return;
 
-        if (collision.gameObject.TryGetComponent(out Player player))
+        if (collision.gameObject.TryGetComponent(out IDamageTaker damageTaker))
         {
-            player.TakeDamage(damage, transform.position, knockBackDistance);
+            damageTaker.TakeDamage(damage, transform.position, knockBackDistance);
         }
     }
 }
