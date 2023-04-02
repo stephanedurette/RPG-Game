@@ -75,7 +75,6 @@ public class Player : MonoBehaviour, IDamageTaker
     public void TakeDamage(int damage, Vector3 sourcePosition, float knockBackDistance)
     {
         health.ChangeHealth(-damage);
-
         transform.position += (transform.position - sourcePosition).normalized * knockBackDistance;
     }
 }

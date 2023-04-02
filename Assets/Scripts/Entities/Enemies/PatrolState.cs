@@ -11,11 +11,15 @@ public class PatrolState : State
 
     private int currentPatrolPositionIndex = -1;
 
+    private void Start()
+    {
+        InitializePatrolPositions();
+    }
+
     public override void OnEnter()
     {
         enemySlime.SetSpeed(EnemySlime.Speed.Walk);
         currentPatrolPositionIndex = -1;
-        InitializePatrolPositions();
     }
 
     public override void OnExit()
