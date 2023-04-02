@@ -5,6 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Health))]
+[RequireComponent(typeof(StateMachine))]
+
 public abstract class Entity : MonoBehaviour, IDamageTaker
 {
     [SerializeField] internal float walkSpeed = 10f;
@@ -16,12 +18,14 @@ public abstract class Entity : MonoBehaviour, IDamageTaker
 
     internal Rigidbody2D rigidBody;
     internal Animator animator;
+    internal StateMachine stateMachine;
 
     public abstract void TakeDamage(Vector3 sourcePosition, AttackAttributesSO attackAttributes);
     internal void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        stateMachine = GetComponent<StateMachine>();
     }
 
     internal void Attack(float attackRadius, float attackDistance)

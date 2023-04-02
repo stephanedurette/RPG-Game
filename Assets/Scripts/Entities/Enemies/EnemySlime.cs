@@ -3,14 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(StateMachine))]
 public class EnemySlime : Entity, IDamageTaker
 {
     [SerializeField] private float runSpeed = 10f;
     [SerializeField] private float playerAggroDistance, playerAttackDistance;
 
     private float currentSpeed;
-    private StateMachine stateMachine;
 
     private bool hasAggro = false;
 
@@ -28,12 +26,6 @@ public class EnemySlime : Entity, IDamageTaker
     public Vector2 LastMoveDirection => lastMoveDirection;
 
     public LayerMask AttackTargets => attackTargets;
-
-    private new void Start()
-    {
-        base.Start();
-        stateMachine = GetComponent<StateMachine>();
-    }
 
     // Update is called once per frame
     private void Update()
