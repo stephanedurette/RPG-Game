@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,7 +15,7 @@ public class StateMachine : MonoBehaviour
         SetState(startingStateIndex);
     }
 
-    public void SetState(int newStateIndex)
+    public void SetState(int newStateIndex, State.StateEnterArgs args = null)
     {
         if (currentStateIndex == newStateIndex) return;
 
@@ -23,7 +24,7 @@ public class StateMachine : MonoBehaviour
 
         currentStateIndex = newStateIndex;
 
-        states[currentStateIndex].OnEnter();
+        states[currentStateIndex].OnEnter(args);
     }
 
     public void Update()

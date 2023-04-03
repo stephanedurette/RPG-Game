@@ -8,7 +8,7 @@ public class PlayerMovementState : State
     [SerializeField] Animator animator;
     [SerializeField] Rigidbody2D rigidBody;
 
-    public override void OnEnter()
+    public override void OnEnter(StateEnterArgs args = null)
     {
         InputManager.OnAttackPressed += OnAttackPressed;
     }

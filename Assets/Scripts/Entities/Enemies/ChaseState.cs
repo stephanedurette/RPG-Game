@@ -6,9 +6,10 @@ public class ChaseState : State
 {
     [SerializeField] private EnemySlime enemySlime;
 
-    public override void OnEnter()
+    public override void OnEnter(StateEnterArgs args = null)
     {
         enemySlime.SetSpeed(EnemySlime.Speed.Run);
+        enemySlime.KnockedBack = false;
     }
 
     public override void OnExit()

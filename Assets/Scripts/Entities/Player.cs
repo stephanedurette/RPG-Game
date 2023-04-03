@@ -8,7 +8,9 @@ public class Player : Entity, IDamageTaker
     public override void TakeDamage(Vector3 sourcePosition, AttackAttributesSO attackAttributes)
     {
         health.ChangeHealth(-attackAttributes.damage);
-        transform.position += (transform.position - sourcePosition).normalized * attackAttributes.knockBackVelocity;
+
+        rigidBody.velocity = (transform.position - sourcePosition).normalized * attackAttributes.knockBackVelocity;
+        stateMachine.SetState(1, new State.KnockbackStateEnterArgs(){ knockBackTime = attackAttributes.knockBackTime, returnState = 0});
     }
 
     internal override void OnHealthEmpty(object sender, EventArgs e)

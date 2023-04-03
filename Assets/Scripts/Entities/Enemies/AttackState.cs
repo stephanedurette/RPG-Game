@@ -15,7 +15,7 @@ public class AttackState : State
 
     private float currentAttackTimer;
 
-    public override void OnEnter()
+    public override void OnEnter(StateEnterArgs args = null)
     {
         enemySlime.SetSpeed(EnemySlime.Speed.Stop);
         currentAttackTimer = 0f;

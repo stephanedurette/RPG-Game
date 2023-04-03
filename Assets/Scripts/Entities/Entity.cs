@@ -19,7 +19,7 @@ public abstract class Entity : MonoBehaviour, IDamageTaker
     internal Rigidbody2D rigidBody;
     internal Animator animator;
     internal StateMachine stateMachine;
-
+    
     public abstract void TakeDamage(Vector3 sourcePosition, AttackAttributesSO attackAttributes);
     internal void Start()
     {

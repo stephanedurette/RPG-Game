@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TestAttack
   m_EditorClassIdentifier: 
   damage: 1
-  knockBackVelocity: 5
-  knockBackTime: 1
+  knockBackVelocity: 30
+  knockBackTime: 0.2
   attackSound: {fileID: 8300000, guid: 480a496b4e830a8448f2db3a10bed439, type: 3}
   attackHitSound: {fileID: 8300000, guid: 654b455f19a5d944aa244e3cabb31243, type: 3}

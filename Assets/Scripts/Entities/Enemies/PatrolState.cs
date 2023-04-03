@@ -16,7 +16,7 @@ public class PatrolState : State
         InitializePatrolPositions();
     }
 
-    public override void OnEnter()
+    public override void OnEnter(StateEnterArgs args = null)
     {
         enemySlime.SetSpeed(EnemySlime.Speed.Walk);
         currentPatrolPositionIndex = -1;

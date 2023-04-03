@@ -11,6 +11,9 @@ public class EnemySlime : Entity, IDamageTaker
     private float currentSpeed;
 
     private bool hasAggro = false;
+    private bool knockedBack = false;
+
+    public bool KnockedBack { set { knockedBack = value; } }
 
     public enum Speed
     {
@@ -19,17 +22,14 @@ public class EnemySlime : Entity, IDamageTaker
         Stop
     }
 
-    public AttackAttributesSO AttackAttributes => attackAttributes;
-
     public float PlayerAttackDistance => playerAttackDistance;
 
-    public Vector2 LastMoveDirection => lastMoveDirection;
-
-    public LayerMask AttackTargets => attackTargets;
 
     // Update is called once per frame
     private void Update()
     {
+        if (knockedBack) return;
+
         if (FindObjectOfType<Player>() == null)
         {
             stateMachine.SetState(0);
@@ -91,7 +91,10 @@ public class EnemySlime : Entity, IDamageTaker
     public override void TakeDamage(Vector3 sourcePosition, AttackAttributesSO attackAttributes)
     {
         health.ChangeHealth(-attackAttributes.damage);
-        transform.position += (transform.position - sourcePosition).normalized * attackAttributes.knockBackVelocity;
+
+        rigidBody.velocity = (transform.position - sourcePosition).normalized * attackAttributes.knockBackVelocity;
+        knockedBack = true;
+        stateMachine.SetState(3, new State.KnockbackStateEnterArgs() { knockBackTime = attackAttributes.knockBackTime, returnState = 1 });
     }
 
     internal override void OnHealthEmpty(object sender, EventArgs e)
